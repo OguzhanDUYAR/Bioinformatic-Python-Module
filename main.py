@@ -5,12 +5,25 @@ from odbiotools import gento as gt
 
 mygen=ft.fastostr("FASTA/sequence.fasta")
 
-print(mygen)
+#print(mygen)
 
 mygentag=ft.fastotag("FASTA/sequence.fasta")
 
-print(mygentag)
+#print(mygentag)
 
-mycodon=gt.gentocod(mygen)
+#mycodon=gt.gentocod(mygen)
 
-print(mycodon)
+#print(mycodon)
+
+#gt.genratio(mygen)
+
+#gt.motifscan("TACA",mygen)
+
+#gt.revcomplmnt(mygen)
+
+gt.primercheck("TTSAACAGACCAAGAAGAGC")
+
+
+
+
+

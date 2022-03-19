@@ -22,7 +22,80 @@ def gentocod(genstr):
         y=genstr[x:x+3]
         codon.append(y)
     return codon
-        
 
+def genratio(genstr):
+    print("-Guanine count = ", genstr.count('G'))
+    print("-Cytosine count = ", genstr.count('C'))
+    print("-Adenine count = ", genstr.count('A'))
+    if genstr.count("U")==0:
+        print("-Thymine count = ", genstr.count('T'))
+        print("-- Ratios of Bases  -- \n-A {:2.2%} \n-T {:2.2%}  \n-G {:2.2%} \n-C {:2.2%}  " .format((genstr.count("A")/len(genstr)),(genstr.count("T")/len(genstr)),(genstr.count("G")/len(genstr)),(genstr.count("C")/len(genstr))))
+        print("-- Ratios of Base Pairs  -- \n-AT {:2.2%} \n-GS {:2.2%} " .format(((genstr.count("A")+genstr.count("T"))/len(genstr)),((genstr.count("G")+genstr.count("C"))/len(genstr))))
+    else:
+        print("-Uracil count = ", genstr.count('U'))
+        print("-- Ratios of Bases  -- \n-A {:2.2%} \n-U {:2.2%}  \n-G {:2.2%} \n-C {:2.2%}  " .format((genstr.count("A")/len(genstr)),(genstr.count("U")/len(genstr)),(genstr.count("G")/len(genstr)),(genstr.count("C")/len(genstr))))
+        print("-- Ratios of Base Pairs  -- \n-AU {:2.2%} \n-GC {:2.2%} " .format(((genstr.count("A")+genstr.count("U"))/len(genstr)),((genstr.count("G")+genstr.count("C"))/len(genstr))))
+
+        
+def motifscan(motif,genstr):
+    motif=motif.upper()
+    if motif in genstr:
+        print("Motif count: ", genstr.count(motif))
+        print("Motif first intex: ", genstr.index(motif))
+    else:
+        print("Motif not found!")
+
+
+
+
+
+def revcomplmnt(genstr):
+    reverse_gen=genstr[::-1]
+    reverse_complement=""
+    for nukleotid in reverse_gen:
+        if nukleotid == "A":
+            reverse_complement+="T"
+        if nukleotid == "T":
+            reverse_complement+="A"
+        if nukleotid == "G":
+            reverse_complement+="C"
+        if nukleotid == "C":
+            reverse_complement+="G"
+    print(reverse_complement)
+    return reverse_complement
+
+def primercheck(primerstr):
+    primerstr=primerstr.upper()
+    primerlong=len(primerstr)
+    GC_ratio=float((primerstr.count("G")+primerstr.count("C"))/primerlong)
+    suitability=0
+    lastfive=primerstr[-5:].count("G")+primerstr[-5:].count("C")
+    Tm=(primerstr.count("G")+primerstr.count("C"))*4+(primerstr.count("A")+primerstr.count("T"))*2
+    if primerlong >= 18 and primerlong <= 24 :
+        print("(OK) Primer Length :",primerlong)
+        ++suitability
+    else:
+        print("(X) Primer Length :",primerlong)
+    if GC_ratio >= 0.40 and GC_ratio <= 0.60 :
+        print("(OK) Primer GC Content:",GC_ratio*100,"%")
+        ++suitability
+    else:
+        print("(X) Primer GC Content:",GC_ratio*100,"%")
+    if (lastfive<=3):
+        print("(OK) Primer GC Clamp :",lastfive)
+        ++suitability
+    else:
+        print("(X) Primer GC Clamp :",lastfive)
+    if Tm <= 58 and Tm >= 52:
+        print("(OK) Primer Melting Temperature:",Tm,"C")
+    elif Tm <= 66:
+        print("(?) Primer Melting Temperature:",Tm,"C")
+    else:
+        print("(!) Primer Melting Temperature:",Tm,"C")
+
+    if suitability <=3:
+        print("-The Primer is suitable. :",primerstr)
+    else:
+        print("-The Primer is unsuitable !!! :",primerstr)
 
 # def codtopro(codstr):
