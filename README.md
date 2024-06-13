@@ -1,4 +1,5 @@
-![alt text](https://raw.githubusercontent.com/OguzhanDUYAR/Bioinformatic-Python-Module/main/Bioinformatic-Python-Module-Logo.webp)
+
+<img src="https://raw.githubusercontent.com/OguzhanDUYAR/Bioinformatic-Python-Module/main/Bioinformatic-Python-Module-Logo.webp" alt="Description of Image" width="200" style="border-radius:50%;">
 
 # Bioinformatic Python Module
 
